@@ -4,6 +4,7 @@ export const GlobalStyles = createGlobalStyle`
   html {
     line-height: 1.15; /* 1 */
     -webkit-text-size-adjust: 100%; /* 2 */
+    background-color: #F8F9FA;
   }
 
   /* Sections
@@ -24,16 +25,7 @@ export const GlobalStyles = createGlobalStyle`
   main {
     display: block;
   }
-
-  /**
-   * Correct the font size and margin on \`h1\` elements within \`section\` and
-   * \`article\` contexts in Chrome, Firefox, and Safari.
-   */
-
-  h1 {
-    font-size: 2em;
-    margin: 0.67em 0;
-  }
+  
 
   /* Grouping content
      ========================================================================== */
@@ -77,7 +69,6 @@ export const GlobalStyles = createGlobalStyle`
 
   abbr[title] {
     border-bottom: none; /* 1 */
-    text-decoration: underline; /* 2 */
     text-decoration: underline dotted; /* 2 */
   }
 
