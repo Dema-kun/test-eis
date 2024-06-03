@@ -1,5 +1,5 @@
 import { t } from 'mobx-state-tree';
-import ProductStore from './ProductStore';
+import ProductStore from './MeterStore';
 
 
 const RootStore = t.model('RootStore', {

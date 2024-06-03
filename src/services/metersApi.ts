@@ -1,18 +1,14 @@
 import axios, { AxiosRequestConfig } from 'axios';
+import { IMeter } from '../models/IMeter';
+import { IAddress } from '../models/IAddress';
 
 
 const client = axios.create({
-  baseURL: 'https://api.escuelajs.co/api/v1',
+  baseURL: 'http://showroom.eis24.me/api/v4/test',
 });
 
-export interface IProducts {
-  id: number,
-  title: string,
-  price: number
-}
-
 export async function getMeters(limit: number, offset: number) {
-  let result: IProducts[] = [];
+  let area: IAddress[]
   const config: AxiosRequestConfig = {
     params: {
       limit: limit,
@@ -20,10 +16,19 @@ export async function getMeters(limit: number, offset: number) {
     }
   };
   try {
-    const response = await client.get<IProducts[]>('/products', config);
-    result = response.data;
+    const metersResponse = await client.get<IMeter[]>('/meters', config);
+    const meter = metersResponse.data
+    console.log(meter);
+    // meters.forEach((item) => {
+    //   getAddress(item.area.id).then(res => area.push(res)).then(() => console.log(area))
+    // })
+    // console.log(meters);
   } catch (err) {
     console.log(err)
   }
-  return result
+}
+
+async function getAddress(id: string) {
+  let response = await client.get<IAddress>(`/areas?id__in=${id}`)
+  return response.data
 }

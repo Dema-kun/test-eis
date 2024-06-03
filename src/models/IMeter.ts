@@ -1,12 +1,12 @@
-import { IAddress } from './IAddress';
-
 
 export interface IMeter {
-  id: number,
-  type: string,
-  date: Date,
-  is_automatic: boolean,
-  initial_values: number,
-  address: IAddress,
-  description: string,
+    id: string,
+    _type: string[],
+    installation_date: string,
+    is_automatic: boolean,
+    initial_values: number[],
+    area: {
+      id: string
+    }
+    description: string,
 }

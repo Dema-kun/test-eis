@@ -1,4 +1,6 @@
 export interface IAddress {
-  id: number,
-  address: string
+  str_number_full: string,
+  house: {
+    address: string,
+  }
 }

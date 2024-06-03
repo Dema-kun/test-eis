@@ -4,12 +4,13 @@ import { Button, ScrollTable, TableBody, TableFooter, Th } from './Table.style';
 import { widthColumn } from './const';
 import useStore from '../../hooks/useStore';
 import { observer } from 'mobx-react-lite';
+import { toJS } from 'mobx';
 
 const Table: FC = observer(() => {
 
-  const {products} = useStore();
+  const {products} = toJS(useStore());
 
-  console.log(products.toJSON())
+  console.log(products)
 
   return (
     <>
@@ -30,7 +31,7 @@ const Table: FC = observer(() => {
         <TableBody>
           <table>
             <tbody>
-              {/*{product.map((item) => {*/}
+              {/*{products.map((item) => {*/}
               {/*  return <TableItem key={item.id} item={item}/>*/}
               {/*})}*/}
             </tbody>
