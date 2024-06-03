@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Button, ScrollTable, TableBody, TableFooter, Th } from './Table.style';
-import TableItem from './TableItem';
+//import TableItem from './TableItem';
 import { widthColumn } from './const';
+import useStore from '../../hooks/useStore';
+import { observer } from 'mobx-react-lite';
 
-const Table = () => {
+const Table: FC = observer(() => {
+
+  const {products} = useStore();
+
+  console.log(products.toJSON())
+
   return (
     <>
       <ScrollTable>
@@ -23,7 +30,9 @@ const Table = () => {
         <TableBody>
           <table>
             <tbody>
-                <TableItem />
+              {/*{product.map((item) => {*/}
+              {/*  return <TableItem key={item.id} item={item}/>*/}
+              {/*})}*/}
             </tbody>
           </table>
         </TableBody>
@@ -33,6 +42,6 @@ const Table = () => {
       </ScrollTable>
     </>
   );
-};
+});
 
 export default Table;
