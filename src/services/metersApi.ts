@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { IMeter } from '../models/IMeter';
-import { IAddress } from '../models/IAddress';
+import { IResults } from '../models/IMeter';
+import { IArea } from '../models/IAddress';
 
 
 const client = axios.create({
@@ -8,7 +8,7 @@ const client = axios.create({
 });
 
 export async function getMeters(limit: number, offset: number) {
-  let area: IAddress[]
+  let area: IArea[];
   const config: AxiosRequestConfig = {
     params: {
       limit: limit,
@@ -16,19 +16,19 @@ export async function getMeters(limit: number, offset: number) {
     }
   };
   try {
-    const metersResponse = await client.get<IMeter[]>('/meters', config);
-    const meter = metersResponse.data
+    const metersResponse = await client.get<IResults>('/meters', config);
+    const meter = metersResponse.data.results
     console.log(meter);
-    // meters.forEach((item) => {
-    //   getAddress(item.area.id).then(res => area.push(res)).then(() => console.log(area))
-    // })
-    // console.log(meters);
+    meter.forEach((item) => {
+      getAddress(item.area.id);
+      console.log(item.area.id);
+    })
   } catch (err) {
     console.log(err)
   }
 }
 
 async function getAddress(id: string) {
-  let response = await client.get<IAddress>(`/areas?id__in=${id}`)
-  return response.data
+  let response = await client.get<IArea>(`/areas?id__in=${id}`)
+  console.log(response.data.results[0])
 }

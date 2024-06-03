@@ -15,15 +15,16 @@ export const Meter = t.model('Product', {
   description: t.string,
 })
 
+
 const MeterStore = t.model('MeterStore', {
-  products: t.array(Meter),
+  meter: t.array(Meter),
 }).actions((self) => ({
     getProducts: flow(function* () {
       try {
         let result
         yield getMeters(10, 0).then((res) => result = res);
         // @ts-ignore
-        self.products = result;
+        self.meter = result;
       } catch (error) {
         console.error("Failed to fetch", error)
       }

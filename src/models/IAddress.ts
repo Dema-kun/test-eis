@@ -4,3 +4,7 @@ export interface IAddress {
     address: string,
   }
 }
+
+export interface IArea {
+  results: IAddress[],
+}

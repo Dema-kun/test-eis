@@ -8,9 +8,9 @@ import { toJS } from 'mobx';
 
 const Table: FC = observer(() => {
 
-  const {products} = toJS(useStore());
+  const {meter} = toJS(useStore());
 
-  console.log(products)
+  console.log(meter)
 
   return (
     <>
