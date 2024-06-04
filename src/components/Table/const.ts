@@ -5,5 +5,5 @@ export const widthColumn = {
   auto: 10,
   current: 14,
   address: 30,
-  other: 24
-}
+  other: 24,
+};

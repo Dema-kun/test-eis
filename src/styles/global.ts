@@ -331,4 +331,4 @@ export const GlobalStyles = createGlobalStyle`
   [hidden] {
     display: none;
   }
-`
+`;
