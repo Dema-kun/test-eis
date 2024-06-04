@@ -1,11 +1,10 @@
 import React, { createContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import MeterStore from './store/MeterStore';
+import { RootStore } from './store/RootStore';
 
 
-const store = MeterStore.create({});
-
+const store = RootStore.create({});
 export const StoreContext = createContext(store);
 
 const root = ReactDOM.createRoot(

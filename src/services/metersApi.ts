@@ -1,34 +1,36 @@
-import axios, { AxiosRequestConfig } from 'axios';
-import { IResults } from '../models/IMeter';
-import { IArea } from '../models/IAddress';
+import axios from 'axios';
+import { IAddress, IMeter } from '../store/MeterStore';
 
 
 const client = axios.create({
   baseURL: 'http://showroom.eis24.me/api/v4/test',
 });
 
+type ICash = {
+  [key: string]: IAddress;
+}
+const cash: ICash = {};
+
 export async function getMeters(limit: number, offset: number) {
-  let area: IArea[];
-  const config: AxiosRequestConfig = {
-    params: {
-      limit: limit,
-      offset: offset
+    const metersResponse: IMeter[] = await client.get(`/meters?limit=${limit}&offset=${offset}`)
+      .then(response => response.data.results)
+      .catch(error => console.log(error))
+
+    // @ts-ignore
+  for(let item of metersResponse) {
+      let address: IAddress;
+      if (cash[item.area.id]) {
+        address = cash[item.area.id];
+      } else {
+        address = await getAddress(item.area.id);
+        cash[item.area.id] = address;
+      }
+      item.address = address;
     }
-  };
-  try {
-    const metersResponse = await client.get<IResults>('/meters', config);
-    const meter = metersResponse.data.results
-    console.log(meter);
-    meter.forEach((item) => {
-      getAddress(item.area.id);
-      console.log(item.area.id);
-    })
-  } catch (err) {
-    console.log(err)
-  }
+    return metersResponse;
 }
 
-async function getAddress(id: string) {
-  let response = await client.get<IArea>(`/areas?id__in=${id}`)
-  console.log(response.data.results[0])
+export async function getAddress(id: string) {
+    return client.get(`/areas?id__in=${id}`)
+      .then(data => data.data.results)
 }

@@ -1,39 +1,27 @@
 import React, { FC } from 'react';
 import { Button, ScrollTable, TableBody, TableFooter, Th } from './Table.style';
-//import TableItem from './TableItem';
+import TableItem from './TableItem';
 import { widthColumn } from './const';
 import useStore from '../../hooks/useStore';
 import { observer } from 'mobx-react-lite';
-import { toJS } from 'mobx';
+import TableHeader from './TableHeader';
 
 const Table: FC = observer(() => {
 
-  const {meter} = toJS(useStore());
-
-  console.log(meter)
-
+  const {getMeters, isLoading} = useStore();
+  
   return (
     <>
       <ScrollTable>
         <table>
-          <thead>
-            <tr>
-              <Th width={widthColumn.id}>№</Th>
-              <Th width={widthColumn.type}>Тип</Th>
-              <Th width={widthColumn.date}>Дата установки</Th>
-              <Th width={widthColumn.auto}>Автоматический</Th>
-              <Th width={widthColumn.current}>Текущее показание</Th>
-              <Th width={widthColumn.address}>Адрес</Th>
-              <Th width={widthColumn.other}>Примечание</Th>
-            </tr>
-          </thead>
+          <TableHeader/>
         </table>
         <TableBody>
           <table>
             <tbody>
-              {/*{products.map((item) => {*/}
-              {/*  return <TableItem key={item.id} item={item}/>*/}
-              {/*})}*/}
+              { isLoading ? getMeters.map((item, index) => {
+                  return <TableItem key={item.id} item={item} index={index}/>
+              }) : <tr>{isLoading}</tr>}
             </tbody>
           </table>
         </TableBody>

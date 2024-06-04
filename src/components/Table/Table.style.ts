@@ -6,6 +6,7 @@ export const ScrollTable = styled.div`
   border-radius: 12px;
   overflow: hidden;
   scrollbar-color: #5E6674 #F0F3F7;
+  height: 90vh;
 
   table {
     width: 100%;
@@ -30,10 +31,10 @@ export const Th = styled.th<ThProps>`
 `
 
 export const TableBody = styled.div`
-  height: 864px;
   overflow-x: auto;
   margin: 0;
   border: none;
+  height: 90%;
 
   table {
     width: 100%;
@@ -43,6 +44,7 @@ export const TableBody = styled.div`
 `
 
 export const TableFooter = styled.div`
+  height: 48px;
   display: flex;
   justify-content: end;
   padding: 8px 16px;

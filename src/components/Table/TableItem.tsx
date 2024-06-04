@@ -3,26 +3,31 @@ import React, { FC } from 'react';
 import { Container, Td } from './TableItem.style';
 import { widthColumn } from './const';
 import trash from '../../assets/trash-default.svg';
-import { IMeter } from '../../models/IMeter'
+import { IMeter } from '../../store/MeterStore';
+import { observer } from 'mobx-react-lite';
+import { AUTOMATION, WATER } from '../../common/constants';
 
 interface TableItemProps {
   item: IMeter,
+  index: number,
 }
 
-const TableItem: FC<TableItemProps> = ({item}) => {
+const TableItem: FC<TableItemProps> = observer(({item, index}) => {
+  let date = new Date(item.installation_date).toLocaleDateString("ru-RU");
+  let is_automatic = String(item.is_automatic)
 
   return (
     <>
       <tr>
-        <Td width={widthColumn.id}>{item.id}</Td>
-        <Td width={widthColumn.type}>{item._type}</Td>
-        <Td width={widthColumn.date}>12.01.2023</Td>
-        <Td width={widthColumn.auto}>yes</Td>
+        <Td width={widthColumn.id}>{index + 1}</Td>
+        <Td width={widthColumn.type}>{WATER[item._type[0]]}</Td>
+        <Td width={widthColumn.date}>{date}</Td>
+        <Td width={widthColumn.auto}>{AUTOMATION[is_automatic]}</Td>
         <Td width={widthColumn.current}>{item.initial_values[0]}</Td>
-        <Td width={widthColumn.address}>Saint-Petersburg</Td>
+        <Td width={widthColumn.address}>{item.address[0].house.address}, {item.address[0].str_number_full}</Td>
         <Td width={widthColumn.other}>
           <Container>
-            Padik
+          {item.description}
             <button>
               <img src={trash} alt='trash'/>
             </button>
@@ -31,6 +36,6 @@ const TableItem: FC<TableItemProps> = ({item}) => {
       </tr>
     </>
   );
-};
+});
 
 export default TableItem;
