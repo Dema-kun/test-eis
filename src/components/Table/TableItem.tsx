@@ -22,7 +22,10 @@ const TableItem: FC<TableItemProps> = observer(({ item, index }) => {
     <>
       <Tr>
         <Td width={widthColumn.id}>{index + 1}</Td>
-        <Td width={widthColumn.type}>{WATER[item._type[0]]}</Td>
+        <Td width={widthColumn.type}>
+          <img src={WATER[item._type[0]].icon} alt="icon" />{' '}
+          {WATER[item._type[0]].water}
+        </Td>
         <Td width={widthColumn.date}>{date}</Td>
         <Td width={widthColumn.auto}>{AUTOMATION[is_automatic]}</Td>
         <Td width={widthColumn.current}>{item.initial_values[0]}</Td>

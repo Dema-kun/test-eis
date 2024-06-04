@@ -1,5 +1,15 @@
+import gvs from '../assets/gvs.svg';
+import hvs from '../assets/hvs.svg';
+
 interface IStringIndex {
   [key: string]: string;
+}
+
+interface IWater {
+  [key: string]: {
+    water: string;
+    icon: string;
+  };
 }
 
 export const AUTOMATION: IStringIndex = {
@@ -8,9 +18,15 @@ export const AUTOMATION: IStringIndex = {
   null: 'нет',
 };
 
-export const WATER: IStringIndex = {
-  ColdWaterAreaMeter: 'ХВС',
-  HotWaterAreaMeter: 'ГВС',
+export const WATER: IWater = {
+  ColdWaterAreaMeter: {
+    water: 'ХВС',
+    icon: hvs,
+  },
+  HotWaterAreaMeter: {
+    water: 'ГВС',
+    icon: gvs,
+  },
 };
 
 export const LIMIT = 20;
